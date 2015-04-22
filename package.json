@@ -1,0 +1,10 @@
+{
+  "name": "ProductCatalog",
+  "description": "A product catalog package",
+  "author": "Sanker Rajendran <winston.sanker@gmail.com>",
+  "dependencies": {
+    "express": ">= 1.2.0"
+  },
+  "engine": "node 0.4.1"
+}
+  

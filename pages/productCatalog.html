@@ -1,0 +1,185 @@
+<!doctype html>
+<html ng-app="productCatalogApp">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="js/angular.min.js"></script>
+	<script src="js/underscore-min.js"></script>
+	<script src="js/jquery-2.1.3.min.js"></script>
+	<link href="css/bootstrap.min.css" rel="stylesheet" >
+	<script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+	<link href="js/jquery-ui-1.11.4.custom/jquery-ui.css" rel="stylesheet">
+    <script src="js/productCatalog.js"></script>
+    <link rel="stylesheet" href="css/productCatalog.css">
+  </head>
+  <body>
+    <div ng-controller="ProductController as prodCtrl" class="container containerWrap" ng-init="selectedTab=1">
+
+	    <nav class="navbar navbar-fixed-top navbar-inverse">
+	      <div class="container-narrow">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">Product Catalog</a>
+	        </div>
+	        <div id="navbar" class="collapse navbar-collapse">
+	          <ul class="nav navbar-nav">
+	          	<li ng-class="{active:prodCtrl.selectedTab===1}"><a href ng-click="prodCtrl.selectedTab=1;prodCtrl.message=''">Home</a></li>
+				<li ng-class="{active:prodCtrl.selectedTab===2}"><a href ng-click="prodCtrl.selectedTab=2;prodCtrl.message=''">Edit</a></li>
+	          </ul>
+	        </div><!-- /.nav-collapse -->
+	      </div><!-- /.container -->
+	    </nav>
+
+		<div  ng-show="prodCtrl.selectedTab===1">
+			<div class="well ">
+				<form >
+				  
+				    <input jq-autocomplete product="prodCtrl.searchedProduct" msg="prodCtrl.message" type="text" class="form-control" placeholder="Search by Product Name" />
+				  
+				</form>
+			</div>
+			<div class="panel panel-default " ng-show="prodCtrl.searchedProduct!==null" >
+				<div class="panel-heading text-center">
+				    <h2 class="panel-title"><b>Product Detail</b></h2>
+				</div>
+				<div class="well panel-body">
+					<div class="row">
+						  <div class="col-md-3"><h5 class="pull-left"><b>Product ID </b></h5></div>
+						  <div class="col-md-1"><h5 class="pull-left"> <b>:</b></h5> </div>
+						  <div class=" form-group">
+						    <div class="col-sm-2 input-group">
+						      <input type="text" disabled class="form-control" placeholder="0000" ng-model="prodCtrl.searchedProduct.productId">
+						    </div>
+						  </div>
+						  <div class="col-md-3"><h5 class="pull-left"><b>Quantity </b> </h5></div>
+						  <div class="col-md-1"><h5 class="pull-left"> <b>:</b></h5> </div>
+						  <div class=" form-group">
+						    <div class="col-sm-2 input-group">
+						      <input type="text" disabled class="form-control" placeholder="0000" ng-model="prodCtrl.searchedProduct.quantity">
+						    </div>
+						  </div>
+					</div>
+					<div class="row">
+					  <div class="col-md-3"><h5 class="pull-left"><b>Product Name </b></h5></div>
+					  <div class="col-md-1"><h5 class="pull-left"> <b>:</b></h5> </div>
+					  <div class=" form-group">
+					    <div class="col-sm-4 input-group">
+					      <input type="text" class="form-control" placeholder="Product Name" ng-model="prodCtrl.searchedProduct.productName">
+					    </div>
+					  </div>
+					</div>
+					<div class="row">
+					  <div class="col-md-3"><h5 class="pull-left"><b>Cost Price</b> </h5></div>
+					  <div class="col-md-1"><h5 class="pull-left"><b>:</b>&nbsp &nbsp &nbsp &nbsp</h5></div>
+					  <div class="form-group">
+						  <div class="col-md-2 input-group">
+						      <div class="input-group-addon">$</div>
+						   		   <input type="text" class="form-control" disabled id="0" placeholder="00" ng-model="prodCtrl.searchedProduct.costPrice">
+						      <div class="input-group-addon">.00</div>
+						   </div>
+					   </div>
+					</div>
+					<div class="row">
+					  <div class="col-md-3"><h5 class="pull-left"><b>Selling Price</b> </h5></div>
+					  <div class="col-md-1"><h5 class="pull-left"><b>:</b>&nbsp &nbsp &nbsp &nbsp</h5></div>
+					  <div class="col-md-2 input-group">
+					      <div class="input-group-addon">$</div>
+					   		   <input type="text" class="form-control" id="0" placeholder="00" ng-model="prodCtrl.searchedProduct.sellingPrice">
+					      <div class="input-group-addon">.00</div>
+					   </div>
+					</div>
+
+					<div class="row">
+						<div class=" col-sm-offset-5 ">
+							<h5 ></h5>
+							</br>
+							<h5 ></h5>
+							<button class="btn btn-large btn-primary" type="button" ng-click="prodCtrl.updateProduct()">Save Product Details</button>
+						</div>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<div class=" col-sm-offset-5 ">
+						{{prodCtrl.message}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default " ng-show="prodCtrl.selectedTab===2">
+			<!--  Product Container  -->
+				<div class="panel-heading text-center">
+				    <h2 class="panel-title"><b>Add New Product </b></h2>
+				</div>
+				<div class="well panel-body">
+					<div class="row">
+					  <div class="col-md-3"><h5 class="pull-left"><b>Product ID </b></h5></div>
+					  <div class="col-md-1"><h5 class="pull-left"> <b>:</b></h5> </div>
+					  <div class=" form-group">
+					    <div class="col-sm-1 input-group">
+					      <input type="number" class="form-control" placeholder="000" ng-model="prodCtrl.newProduct.productId">
+					    </div>
+					  </div>
+					</div>
+					<div class="row">
+					  <div class="col-md-3"><h5 class="pull-left"><b>Product Name </b></h5></div>
+					  <div class="col-md-1"><h5 class="pull-left"> <b>:</b></h5> </div>
+					  <div class=" form-group">
+					    <div class="col-sm-4 input-group">
+					      <input type="text" class="form-control" placeholder="Product Name" ng-model="prodCtrl.newProduct.productName">
+					    </div>
+					  </div>
+					</div>
+					<div class="row">
+					  <div class="col-md-3"><h5 class="pull-left"><b>Quantity</b> </h5></div>
+					  <div class="col-md-1"><h5 class="pull-left"><b>:</b>&nbsp &nbsp &nbsp &nbsp</h5></div>
+					  <div class="form-group">
+						  <div class="col-md-2 input-group">
+						      <div class="input-group-addon">$</div>
+						   		   <input type="number" class="form-control" id="0" placeholder="00" ng-model="prodCtrl.newProduct.quantity">
+						      <div class="input-group-addon">.00</div>
+						   </div>
+					   </div>
+					</div>
+					<div class="row">
+					  <div class="col-md-3"><h5 class="pull-left"><b>Cost Price</b> </h5></div>
+					  <div class="col-md-1"><h5 class="pull-left"><b>:</b>&nbsp &nbsp &nbsp &nbsp</h5></div>
+					  <div class="form-group">
+						  <div class="col-md-2 input-group">
+						      <div class="input-group-addon">$</div>
+						   		   <input type="number" class="form-control" id="0" placeholder="00" ng-model="prodCtrl.newProduct.costPrice">
+						      <div class="input-group-addon">.00</div>
+						   </div>
+					   </div>
+					</div>
+					<div class="row">
+					  <div class="col-md-3"><h5 class="pull-left"><b>Selling Price</b> </h5></div>
+					  <div class="col-md-1"><h5 class="pull-left"><b>:</b>&nbsp &nbsp &nbsp &nbsp</h5></div>
+					  <div class="col-md-2 input-group">
+					      <div class="input-group-addon">$</div>
+					   		   <input type="number" class="form-control" id="0" placeholder="00" ng-model="prodCtrl.newProduct.sellingPrice">
+					      <div class="input-group-addon">.00</div>
+					   </div>
+					</div>
+					<div class="row">
+						<div class=" col-sm-offset-5 ">
+							<h5 ></h5>
+							</br>
+							<h5 ></h5>
+							<button class="btn btn-large btn-primary" type="button" ng-click="prodCtrl.createProduct()">
+								Create New Product</button>
+						</div>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<div class=" col-sm-offset-5 ">
+						{{prodCtrl.message}}
+					</div>
+				</div>
+		</div>
+	</div>
+  </body>
+</html>

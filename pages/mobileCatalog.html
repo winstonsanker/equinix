@@ -1,0 +1,83 @@
+<!doctype html>
+<html ng-app="mobileCatalogApp">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="js/angular.min.js"></script>
+	<script src="js/underscore-min.js"></script>
+	<script src="js/jquery-2.1.3.min.js"></script>
+	<link href="css/bootstrap.min.css" rel="stylesheet" >
+	<script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+	<link href="js/jquery-ui-1.11.4.custom/jquery-ui.css" rel="stylesheet">
+    <script src="js/mobileCatalog.js"></script>
+  </head>
+  <body>
+		<div ng-controller="MobileController as prodCtrl" class="container">
+			<div class="well ">
+				<form >
+				  
+				    <input jq-autocomplete product="prodCtrl.searchedProduct" type="text" class="form-control" placeholder="Search by Product Name" />
+				  
+				</form>
+			</div>
+			<div class="panel panel-default well ">
+
+					<div class="row">
+					  <div class="col-md-12"><h3 class="text-center"><b>Product Details</b></h3></div>
+					</div>
+
+					<div class="row">
+					  <div class="col-md-3"><h5 class="pull-left"><b>Product ID</b></h5></div>
+					  <div class="col-md-1"><h5 class="pull-left"> <b>:</b></h5> </div>
+					  <div class=" form-group">
+					    <div class="col-sm-1 input-group">
+					      <input type="number" class="form-control" placeholder="0000" ng-model="prodCtrl.searchedProduct.productId"/>
+					    </div>
+					  </div>
+					</div>
+
+					<div class="row">
+					  <div class="col-md-3"><h5 class="pull-left"><b>Product Name </b></h5></div>
+					  <div class="col-md-1"><h5 class="pull-left"> <b>:</b></h5> </div>
+					  <div class=" form-group">
+					    <div class="col-sm-4 input-group">
+					      <input type="text" class="form-control" placeholder="Product Name" ng-model="prodCtrl.searchedProduct.productName"/>
+					    </div>
+					  </div>
+					</div>
+
+					<div class="row">
+					  <div class="col-md-3"><h5 class="pull-left"><b>Quantity</b></h5></div>
+					  <div class="col-md-1"><h5 class="pull-left"> <b>:</b></h5> </div>
+					  <div class=" form-group">
+					    <div class="col-sm-1 input-group">
+					      <input type="number" class="form-control" placeholder="000" ng-model="prodCtrl.searchedProduct.quantity"/>
+					    </div>
+					  </div>
+					</div>
+
+					<div class="row">
+					  <div class="col-md-3"><h5 class="pull-left"><b>Cost Price</b></h5></div>
+					  <div class="col-md-1"><h5 class="pull-left"> <b>:</b></h5> </div>
+					  <div class=" form-group">
+					    <div class="col-sm-1 input-group">
+					      <input type="number" class="form-control" placeholder="000" ng-model="prodCtrl.searchedProduct.costPrice"/>
+					    </div>
+					  </div>
+					</div>
+
+					<div class="row">
+					  <div class="col-md-3"><h5 class="pull-left"><b>Selling Price </b></h5></div>
+					  <div class="col-md-1"><h5 class="pull-left"> <b>:</b></h5> </div>
+					  <div class=" form-group">
+					    <div class="col-sm-1 input-group">
+					      <input type="number" class="form-control" placeholder="000" ng-model="prodCtrl.searchedProduct.sellingPrice"/>
+					    </div>
+					  </div>
+					</div>
+					<div class="row text-center">
+					  <div class="col-md-12"><button class="btn btn-large btn-primary" type="button" ng-click="prodCtrl.saveProduct()">Save Product Details</button></div>
+					</div>
+			</div>
+		</div>
+  </body>
+</html>
